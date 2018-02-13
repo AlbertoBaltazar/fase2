@@ -33,11 +33,11 @@ function ctrlOrigenDestino(torre, numAros){
             var numDestino = numeroAros(destino.id);
             var aroOrigen = obtenerAro(origen);
             var aroDestino = obtenerAro(destino);
-            debugger;
             if (numDestino == 0 || (aroOrigen.id < aroDestino.id)) {
                 quitarAro(origen);
                 dibujarTorre(origen);
                 ponerAro(destino);
+                debugger;
                 dibujarTorre(destino);
             }
         }else {
@@ -45,7 +45,6 @@ function ctrlOrigenDestino(torre, numAros){
             selDestino = false;
         }
     }
-
     if (origen != null && destino != null) {
         limpiarValores();
     }
@@ -57,13 +56,28 @@ function limpiarValores() {
         aroSeleccionado = null;
         seleccionado = false;
         selDestino = false;
+        $('.torreContent').css('border-top', '');
+        $('.torreContent').css('border-left', '');
+        $('.torreContent').css('border-right', '');
 }
 
 function dibujarTorre(torre) {
     var tempId = torre.id;
     var temp = $(torre).children();
-    while (($('#'+torre.id).children().length > 0)) {
-        $('#'+torre.id+' div').last().remove();
+    var espacioRest = (($('#'+tempId).children().length < 5) ? 5 - $('#'+tempId).children().length : 0);
+    var cont = 0;
+    // while ($('#'+torre.id).children().length > 0) {
+    //     $('#'+torre.id+' div').last().remove();
+    // }
+    $('#'+torre.id).empty();
+    debugger;
+    if (($('#'+torre.id).children().length + espacioRest) >= 5) {
+
+    }else {
+        while (espacioRest > 0 ) {
+            $('#'+tempId).append(vacio());
+            espacioRest--;
+        }
     }
     $.each(temp, function(index, value){
         $('#'+tempId).append(value);
@@ -73,25 +87,51 @@ function dibujarTorre(torre) {
 function quitarAro(torre) {
     var temp = $(torre).children();
     // var res;
+    tempId = torre.id;
     $.each(temp, function(index, value){
         if (value.className == "aro") {
             aroSeleccionado = value;
-            value = vacio();
+            var divVacio = vacio();
+            $('#'+tempId).children()[index].remove();
+            $('#'+tempId).children().splice(0,0,vacio())
+            // $('#'+tempId).children().unshift(divVacio[0]);
             return false;
         }
     });
+    debugger;
 }
 
 function ponerAro(torre) {
     var temp = $(torre).children();
-    debugger;
-    for (var i = temp.length-1; i>=0; i--) {
-        if (temp[i].className == 'vacio') {
+    var tempId = torre.id;
+    $.each(temp, function(index, value){
+        if (value.className === "vacio") {
             debugger;
-            temp[i] = aroSeleccionado;
-            break;
+            $('#'+tempId).children()[index].remove();
         }
+    });
+    var espacioRest = (($('#'+tempId).children().length < 5) ? 5 - $('#'+tempId).children().length : 0);
+    if (espacioRest > 0) {
+        espacioRest--
     }
+    while (espacioRest > 0) {
+        $('#'+tempId).append(vacio());
+        espacioRest--;
+    }
+    $('#'+tempId).splice(0,0,aroSeleccionado);
+    debugger;
+    $.each(temp, function(index, value){
+        $('#'+tempId).append(value);
+    });
+
+    // for (var i = $('#'+tempId).children().length-1; i>=0; i--) {
+    //     if (temp[i].className == 'vacio') {
+    //         debugger;
+    //         // temp[i] = aroSeleccionado;
+    //         $('#'+tempId).append(aroSeleccionado);
+    //         break;
+    //     }
+    // }
 }
 
 function obtenerAro(torre) {
