@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="usuariosController as usu">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 5</title>
+        <link rel="stylesheet" href="node_modules/bootstrap/css/bootstrap.min.css">
+        <h2 align="center">Cat&aacute;logo de Usuarios</h2>
+    </head>
+    <body ng-init="usu.obtenerUsuarios()">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs" align="center">
+                    <button type="button" name="btnAgregar" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="btnAgregar">Agregar Usuario</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="active">
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Estatus</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="u in usu.usuarios">
+                                <td>{{u.clave}}</td>
+                                <td>{{u.nombre}}</td>
+                                <td>{{u.apellido}}</td>
+                                <td>{{u.fec_nacimiento  | date:'dd-MM-yyyy' }}</td>
+                                <td>{{u.estatus}}</td>
+                                <td>
+                                    <span class="glyphicon glyphicon-pencil" style="cursor:pointer; margin-right: 10px;" ng-click="usu.editarUsuarioModal(u)"></span>
+                                    <span class="glyphicon glyphicon-trash" style="cursor:pointer; margin-left: 10px;" ng-click="usu.eliminarUsuario(u)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" name="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Agregar/Editar Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-4"  style="text-align:right">
+                                    <label>Clave:</label>
+                                </div>
+                                <div class="col-xs-7">
+                                    <input type="text" name="txtClave" class="form-control" ng-model="usu.datos.clave" maxlength="3" alphanumeric>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4"  style="text-align:right">
+                                    <label>Nombre:</label>
+                                </div>
+                                <div class="col-xs-7">
+                                    <input type="text" name="txtNombre" class="form-control" ng-model="usu.datos.nombre" maxlength="20" alphanumeric>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4"  style="text-align:right">
+                                    <label>Apellido:</label>
+                                </div>
+                                <div class="col-xs-7">
+                                    <input type="text" name="txtApellido" class="form-control" ng-model="usu.datos.apellido" maxlength="20" alphanumeric>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4"  style="text-align:right">
+                                    <label>Fecha de Nacimiento:</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="date" class="form-control" ng-model="usu.datos.fecNacimiento" value="{{usu.datos.fecNacimiento}}">
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="chkEstatus" ng-model="usu.datos.estatus">
+                                        <label class="form-check-label" for="chkEstatus">Estatus</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" name="btnGuardar" class="btn btn-primary btn-sm" ng-click="usu.guardar();">Guardar</button>
+                        <button type="button" name="btnCerrar" class="btn btn-danger btn-sm" data-dismiss="modal" id="btnCancelar"">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+    <style media="screen">
+        th, td{
+            text-align: center;
+        }
+    </style>
+</html>
+<script type="text/javascript" src="./../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="app/validaciones.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
