@@ -11,9 +11,9 @@
             return;
         }
         iniciar();
-        mostrar();
+        //mostrar();
         hanoi($('#numAros').val(), torre1, torre2, torre3);
-        mostrar();
+        //mostrar();
         $('#lblResultado').text("Total de movimientos: "+cont);
         cont = 0;
     });
@@ -40,7 +40,6 @@
         console.log(torre1);
         console.log(torre2);
         console.log(torre3);
-        console.log();
     }
 
     function iniciar() {
