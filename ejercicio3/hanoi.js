@@ -6,11 +6,16 @@
     var cont = 0;
 
     $('#btnIniciar').on('click', function(){
+        if ($('#numAros').val() == 0) {
+            alert("Es necesario introducir numero de aros");
+            return;
+        }
         iniciar();
         mostrar();
-        hanoi(n, torre1, torre2, torre3);
+        hanoi($('#numAros').val(), torre1, torre2, torre3);
         mostrar();
         $('#lblResultado').text("Total de movimientos: "+cont);
+        cont = 0;
     });
     // alert("Total de movimientos: "+cont);
 
