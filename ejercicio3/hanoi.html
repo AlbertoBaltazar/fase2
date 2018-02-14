@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hanoi Simple</title>
+        <h3 align="center">Torres de Hanoi</h3>
+        <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-xs-center align-items-center">
+                <div class="col" align="right">
+                    <label>Calcular numero de movimientos para:</label>
+                </div>
+                <div class="col-1">
+                    <input type="text" name="numAros" value="5" id="numAros" class="form-control" style="text-align:right">
+                </div>
+                <div class="col">
+                    <label>&nbsp;aros.</label>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-xs-center">
+                <div class="col" align="center">
+                    <button type="button" name="btnIniciar" id="btnIniciar" class="btn btn-primary">Iniciar</button>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-xs-center">
+                <div class="col" align="center">
+                    <label id="lblResultado"></label>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="hanoi.js"></script>
+    <!-- <script type="text/javascript" src="ejemploHanoi.js"></script> -->
+</html>
